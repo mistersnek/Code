@@ -1,0 +1,3 @@
+﻿  exercise.cpp
+C:\Users\user\source\repos\coursework2\coursework2\exercise.cpp(253,24): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  coursework2.vcxproj -> C:\Users\user\source\repos\coursework2\x64\Debug\coursework2.exe
