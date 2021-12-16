@@ -47,12 +47,14 @@ GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
 GLfloat lastFrame = 0.0f;  	// Time of last frame
 
 							// Light attributes
-glm::vec3 lightPos(1.0f, 0.25f, 1.0f);
+glm::vec3 lightPos(0.0f, 2.0f, 0.0f);
 
 							// The MAIN function, from here we start the application and run the game loop
 
 int main(void)
 {
+
+
 	//++++create a glfw window+++++++++++++++++++++++++++++++++++++++
 	GLFWwindow* window;
 
@@ -135,50 +137,37 @@ int main(void)
 	};
 
 	GLfloat pyramid[]{
+		//coordinates			color				vertices for texture	normals
+		0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,									
+		-0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 1.0f,						
+		0.5f, 0.0f,  -0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 1.0f,						
+		-0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,						
+		-0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 1.0f,						
+		0.5f, 0.0f,  0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 1.0f,								
 
-		0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		-0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-		0.5f, 0.0f,  -0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-		-0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		-0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-		0.5f, 0.0f,  0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 1.0f,		0.0f, 0.0f, 0.0f,
+		-0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,									
+		-0.5f, 0.0f, -0.5f,		 0.0f, -1.0f,  0.0f,	1.0f, 0.0f,									
+		0.0f, 0.8f,  0.0f,		0.0f, -1.0f,  0.0f,		0.5f, 1.0f,									
 
-		-0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,		-0.8f, 0.5f, 0.0f,
-		-0.5f, 0.0f, -0.5f,		 0.0f, -1.0f,  0.0f,	1.0f, 0.0f,		-0.8f, 0.5f, 0.0f,
-		0.0f, 0.8f,  0.0f,		0.0f, -1.0f,  0.0f,		0.5f, 1.0f,		-0.8f, 0.5f, 0.0f,
+		-0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 0.0f,						
+		0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,						
+		0.0f, 0.8f,  0.0f,		0.0f, -1.0f,  0.0f,		0.5f, 1.0f,						
 
-		-0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 0.0f,		0.0f, 0.5f, -0.8f,
-		0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,		0.0f, 0.5f, -0.8f,
-		0.0f, 0.8f,  0.0f,		0.0f, -1.0f,  0.0f,		0.5f, 1.0f,		0.0f, 0.5f, -0.8f,
+		0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,					
+		0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 0.0f,					
+		0.0f, 0.8f,  0.0f,		0.0f, -1.0f,  0.0f,		0.5f, 1.0f,					
 
-		0.5f, 0.0f, -0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,		0.8f, 0.5f, 0.0f,
-		0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 0.0f,		0.8f, 0.5f, 0.0f,
-		0.0f, 0.8f,  0.0f,		0.0f, -1.0f,  0.0f,		0.5f, 1.0f,		0.8f, 0.5f, 0.0f,
-
-		0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 0.0f,		0.0f, 0.5f, 0.8f,
-		-0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,		0.0f, 0.5f, 0.8f,
-		0.0f, 0.8f,  0.0f,		0.0f, -1.0f,  0.0f,		0.5f, 1.0f,		0.0f, 0.5f, 0.8f,
+		0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		1.0f, 0.0f,					
+		-0.5f, 0.0f, 0.5f,		0.0f, -1.0f,  0.0f,		0.0f, 0.0f,					
+		0.0f, 0.8f,  0.0f,		0.0f, -1.0f,  0.0f,		0.5f, 1.0f,					
 	};
 
-	/*GLuint indices[]{
-		0, 1, 2,
-		0, 2, 3,
-		4, 6, 5,
-		7, 9, 8,
-		10, 12, 11,
-		13, 15, 14
-	};*/
 
 	// First, set the container's VAO (and VBO)
-	GLuint VBOs[3], containerVAO[3];
+	GLuint VBOs[6], containerVAO[6];
 	
 	glGenVertexArrays(3, containerVAO);
 	glGenBuffers(3, VBOs);
-
-	/*GLuint EBO;
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,	GL_STATIC_DRAW);*/
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(pyramid), pyramid, GL_STATIC_DRAW);
@@ -186,14 +175,100 @@ int main(void)
 	
 	glBindVertexArray(containerVAO[0]);
 	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);					
-	// Normal attribute								
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+	// Normal attribute								8
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);					
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(2);					
-	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(3);
+	glBindVertexArray(0);
+
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pyramid), pyramid, GL_STATIC_DRAW);
+
+
+	glBindVertexArray(containerVAO[1]);
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);					
+	// Normal attribute								8
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);					
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);					
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(3);
+	glBindVertexArray(0);
+
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pyramid), pyramid, GL_STATIC_DRAW);
+
+	glBindVertexArray(containerVAO[2]);
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);					
+	// Normal attribute								8
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);					
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);					
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(3);
+	glBindVertexArray(0);
+
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pyramid), pyramid, GL_STATIC_DRAW);
+
+	glBindVertexArray(containerVAO[3]);
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	// Normal attribute								8
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(3);
+	glBindVertexArray(0);
+
+
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pyramid), pyramid, GL_STATIC_DRAW);
+
+	glBindVertexArray(containerVAO[4]);
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	// Normal attribute								8
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(3);
+	glBindVertexArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pyramid), pyramid, GL_STATIC_DRAW);
+
+	glBindVertexArray(containerVAO[5]);
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	// Normal attribute								8
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(3);
 	glBindVertexArray(0);
 
@@ -230,7 +305,7 @@ int main(void)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	//make image repeat in both S and T axis
+	//make image repeat in both S and T axis when needed
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
@@ -246,9 +321,23 @@ int main(void)
 	glUseProgram(shaderProgram);
 	glUniform1i(tex0Uni, 0);
 
+
+	// Draw a white grid "floor" for the tetrahedron to sit on.
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_LINES);
+	for (GLfloat i = -2.5; i <= 2.5; i += 0.25) {
+		glVertex3f(i, 0, 2.5); glVertex3f(i, 0, -2.5);
+		glVertex3f(2.5, 0, i); glVertex3f(-2.5, 0, i);
+	}
+	glEnd();
+
+
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
+
+		glEnable(GL_NORMALIZE);
+
 		// Calculate deltatime of current frame
 		GLfloat currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
@@ -262,20 +351,23 @@ int main(void)
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
+
+		// ********************************************************************   PYRAMID 1   ****************************************************************//
+
+
 		// Use corresponding shader when setting uniforms/drawing objects
 		glUseProgram(shaderProgram);
 		GLint objectColorLoc = glGetUniformLocation(shaderProgram, "objectColor");
 		GLint lightColorLoc = glGetUniformLocation(shaderProgram, "lightColor");
 		GLint lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
 		GLint viewPosLoc = glGetUniformLocation(shaderProgram, "viewPos");
-		//glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.0f);
+		//glUniform3f(objectColorLoc, 1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, texture);
-		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+		glUniform3f(lightColorLoc, 0.5f, 1.0f, 1.0f);
 		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
 		glUniform3f(viewPosLoc, cameraPos.x, cameraPos.y, cameraPos.z);
 
 		
-
 		// Create camera transformations
 		glm::mat4 view;
 		glm::mat4 projection;
@@ -290,19 +382,235 @@ int main(void)
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-
 		// Draw the container (using container's vertex attributes)
 		glBindVertexArray(containerVAO[0]);
 		glm::mat4 model;
-		//model = glm::rotate(model, (GLfloat)glfwGetTime() * 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 iden;
+
+		model = glm::translate(model, glm::vec3((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * 0.5f), ((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * -0.20f)), 0.0f));
+		
+		model = glm::rotate(model, (GLfloat)glfwGetTime() * 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		//if i need to move the piece somewhere else
-		glm::vec3 pyramidPos = glm::vec3(0.0f, 0.0f, 0.0f);
-		model = glm::translate(model, pyramidPos);
+		glm::vec3 pyramidPos = glm::vec3(0.0f, -1.0f, 0.0f);
+	    model = glm::translate(model, pyramidPos);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 
+
+		// ********************************************************************   PYRAMID 2   ****************************************************************//
+
+		// Use corresponding shader when setting uniforms/drawing objects
+		glUseProgram(shaderProgram);
+		objectColorLoc = glGetUniformLocation(shaderProgram, "objectColor");
+		lightColorLoc = glGetUniformLocation(shaderProgram, "lightColor");
+		lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
+		viewPosLoc = glGetUniformLocation(shaderProgram, "viewPos");
+		//glUniform3f(objectColorLoc, 1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+		glUniform3f(viewPosLoc, cameraPos.x, cameraPos.y, cameraPos.z);
+
+
+		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+
+		// Get the uniform locations
+		modelLoc = glGetUniformLocation(shaderProgram, "model");
+		viewLoc = glGetUniformLocation(shaderProgram, "view");
+		projLoc = glGetUniformLocation(shaderProgram, "projection");
+		// Pass the matrices to the shader
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+		// Draw the container (using container's vertex attributes)
+		glBindVertexArray(containerVAO[1]);
+		model = glm::mat4();
+		iden = glm::mat4();
+
+		model = glm::translate(model, glm::vec3((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * 1.0f), ((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * -1.0f)), 0.0f));
+
+		//if i need to move the piece somewhere else
+		glm::vec3 pyramidPos1 = glm::vec3(0.0f, -1.0f, 0.0f);
+		model = glm::translate(model, pyramidPos1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+
+		// ********************************************************************   PYRAMID 3   ****************************************************************//
+
+		// Use corresponding shader when setting uniforms/drawing objects
+		glUseProgram(shaderProgram);
+		objectColorLoc = glGetUniformLocation(shaderProgram, "objectColor");
+		lightColorLoc = glGetUniformLocation(shaderProgram, "lightColor");
+		lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
+		viewPosLoc = glGetUniformLocation(shaderProgram, "viewPos");
+		//glUniform3f(objectColorLoc, 1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+		glUniform3f(viewPosLoc, cameraPos.x, cameraPos.y, cameraPos.z);
+
+
+		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+
+		// Get the uniform locations
+		modelLoc = glGetUniformLocation(shaderProgram, "model");
+		viewLoc = glGetUniformLocation(shaderProgram, "view");
+		projLoc = glGetUniformLocation(shaderProgram, "projection");
+		// Pass the matrices to the shader
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+		// Draw the container (using container's vertex attributes)
+		glBindVertexArray(containerVAO[2]);
+		model = glm::mat4();
+		iden = glm::mat4();
+
+		model = glm::translate(model, glm::vec3((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * -1.0f), ((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * -1.0f)), 0.0f));
+
+		//if i need to move the piece somewhere else
+		glm::vec3 pyramidPos2 = glm::vec3(0.0f, -1.0f, 0.0f);
+		model = glm::translate(model, pyramidPos2);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+
+		// ********************************************************************   PYRAMID 4   ****************************************************************//
+
+		// Use corresponding shader when setting uniforms/drawing objects
+		glUseProgram(shaderProgram);
+		objectColorLoc = glGetUniformLocation(shaderProgram, "objectColor");
+		lightColorLoc = glGetUniformLocation(shaderProgram, "lightColor");
+		lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
+		viewPosLoc = glGetUniformLocation(shaderProgram, "viewPos");
+		//glUniform3f(objectColorLoc, 1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glUniform3f(lightColorLoc, 0.5f, 1.0f, 1.0f);
+		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+		glUniform3f(viewPosLoc, cameraPos.x, cameraPos.y, cameraPos.z);
+
+
+		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+
+		// Get the uniform locations
+		modelLoc = glGetUniformLocation(shaderProgram, "model");
+		viewLoc = glGetUniformLocation(shaderProgram, "view");
+		projLoc = glGetUniformLocation(shaderProgram, "projection");
+		// Pass the matrices to the shader
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+		// Draw the container (using container's vertex attributes)
+		glBindVertexArray(containerVAO[3]);
+		model = glm::mat4();
+		iden = glm::mat4();
+
+		model = glm::translate(model, glm::vec3((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * -0.5f), ((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * -0.20f)), 0.0f));
+
+		model = glm::rotate(model, (GLfloat)glfwGetTime() * 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		//if i need to move the piece somewhere else
+		glm::vec3 pyramidPos3 = glm::vec3(0.0f, -1.0f, 0.0f);
+		model = glm::translate(model, pyramidPos3);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+
+		// ********************************************************************   PYRAMID 5   ****************************************************************//
+
+				// Use corresponding shader when setting uniforms/drawing objects
+		glUseProgram(shaderProgram);
+		objectColorLoc = glGetUniformLocation(shaderProgram, "objectColor");
+		lightColorLoc = glGetUniformLocation(shaderProgram, "lightColor");
+		lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
+		viewPosLoc = glGetUniformLocation(shaderProgram, "viewPos");
+		//glUniform3f(objectColorLoc, 1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glUniform3f(lightColorLoc, 0.5f, 1.0f, 1.0f);
+		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+		glUniform3f(viewPosLoc, cameraPos.x, cameraPos.y, cameraPos.z);
+
+
+		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+
+		// Get the uniform locations
+		modelLoc = glGetUniformLocation(shaderProgram, "model");
+		viewLoc = glGetUniformLocation(shaderProgram, "view");
+		projLoc = glGetUniformLocation(shaderProgram, "projection");
+		// Pass the matrices to the shader
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+		// Draw the container (using container's vertex attributes)
+		glBindVertexArray(containerVAO[4]);
+		model = glm::mat4();
+		iden = glm::mat4();
+
+		//if i need to move the piece somewhere else
+		glm::vec3 pyramidPos4 = glm::vec3(0.0f, -1.0f, 0.0f);
+		model = glm::translate(model, pyramidPos4);
+
+		model = glm::translate(model, glm::vec3((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * 0.0f), ((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * -1.0f)), 0.0f));
+
+		model = glm::rotate(model, (GLfloat)glfwGetTime() * 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+
+
+		// ********************************************************************   PYRAMID 6   ****************************************************************//
+
+				// Use corresponding shader when setting uniforms/drawing objects
+		glUseProgram(shaderProgram);
+		objectColorLoc = glGetUniformLocation(shaderProgram, "objectColor");
+		lightColorLoc = glGetUniformLocation(shaderProgram, "lightColor");
+		lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
+		viewPosLoc = glGetUniformLocation(shaderProgram, "viewPos");
+		//glUniform3f(objectColorLoc, 1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+		glUniform3f(viewPosLoc, cameraPos.x, cameraPos.y, cameraPos.z);
+
+
+		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+
+		// Get the uniform locations
+		modelLoc = glGetUniformLocation(shaderProgram, "model");
+		viewLoc = glGetUniformLocation(shaderProgram, "view");
+		projLoc = glGetUniformLocation(shaderProgram, "projection");
+		// Pass the matrices to the shader
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+		// Draw the container (using container's vertex attributes)
+		glBindVertexArray(containerVAO[5]);
+		model = glm::mat4();
+		iden = glm::mat4();
+
+		//if i need to move the piece somewhere else
+		glm::vec3 pyramidPos5 = glm::vec3(0.0f, -1.0f, 0.0f);
+		model = glm::translate(model, pyramidPos5);
+
+		model = glm::translate(model, glm::vec3((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * 0.0f), ((GLfloat)(glm::sin((GLfloat)glfwGetTime() * 1.0f) * 0.6f)), 0.0f));
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+		// ********************************************************************    LAMP    ****************************************************************//
 
 		// Also draw the lamp object, again binding the appropriate shader
 		glUseProgram(lampshader);
@@ -317,6 +625,7 @@ int main(void)
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		
 		// Draw the light object (using light's vertex attributes)
 		glBindVertexArray(lightVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -347,6 +656,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		else if (action == GLFW_RELEASE)
 			keys[key] = false;
 	}
+
+
 }
 
 void do_movement()
